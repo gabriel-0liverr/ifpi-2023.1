@@ -1,61 +1,82 @@
 #include <iostream>
+#include <string>
 
 using namespace std;
 
-// Definição da estrutura de um nó da árvore binária
 struct No {
-    int valor;
-    char operacao;
-    No* esquerda;
-    No* direita;
+    string value;
+    No* left;
+    No* right;
 };
 
-// Função auxiliar que verifica se um nó é uma folha (não tem subárvores)
-bool ehFolha(No* no) {
-    return no->esquerda == nullptr && no->direita == nullptr;
+No* criar_no(string value) {
+    No* no = new No;
+    no->value = value;
+    no->left = nullptr;
+    no->right = nullptr;
+    return no;
 }
 
-// Função recursiva que avalia a expressão a partir de um nó da árvore
-int avaliarExpressao(No* no) {
-    // Se o nó for uma folha, seu valor representa um número da expressão
-    if (ehFolha(no)) {
-        return no->valor;
-    }
-    // Senão, o nó representa uma operação e seus filhos representam os operandos
-    int esquerda = avaliarExpressao(no->esquerda);
-    int direita = avaliarExpressao(no->direita);
-    // Realiza a operação a partir dos valores dos filhos
-    switch (no->operacao) {
-        case '+':
-            return esquerda + direita;
-        case '-':
-            return esquerda - direita;
-        case '*':
-            return esquerda * direita;
-        case '/':
-            return esquerda / direita;
+void inserir_no(No* &root, string value) {
+    if (root == nullptr) {
+        root = criar_no(value);
+        return;
+    } else if (value < root->value) {
+        inserir_no(root->left, value);
+    } else if (value > root->value) {
+        inserir_no(root->right, value);
     }
 }
 
-// Função principal que cria a árvore e avalia a expressão
-int valor(No* raiz) {
-    return avaliarExpressao(raiz);
+void exibirNos(No* root){
+    if(root != nullptr){
+        cout << " ( " << root->value;
+        exibirNos(root->left);
+        exibirNos(root->right);
+        cout << " ) ";
+    }
 }
 
-// Função principal que testa a função valor(A)
+int valor(No* no) {
+  if (no->value[0] >= '0' && no->value[0] <= '9') { // verifica se o nó é um número
+    return stoi(no->value); // converte char para string e depois para int
+  } else { // nó é um operador
+    int esq = valor(no->left); // avalia a subárvore esquerda
+    int dir = valor(no->right); // avalia a subárvore direita
+
+    switch (no->value[0]) { // realiza a operação correspondente ao operador
+      case '+':
+        return esq + dir;
+      case '-':
+        return esq - dir;
+      case '*':
+        return esq * dir;
+      case '/':
+        return esq / dir;
+      default:
+        return 0;
+    }
+  }
+}
+
 int main() {
-    // Cria a árvore que representa a expressão ((5+3)/4)*(6-1)
-    No* no1 = new No {5, '\0', nullptr, nullptr};
-    No* no2 = new No {3, '\0', nullptr, nullptr};
-    No* no3 = new No {'+', '+', no1, no2};
-    No* no4 = new No {4, '\0', nullptr, nullptr};
-    No* no5 = new No {'/', '/', no3, no4};
-    No* no6 = new No {6, '\0', nullptr, nullptr};
-    No* no7 = new No {1, '\0', nullptr, nullptr};
-    No* no8 = new No {'-', '-', no6, no7};
-    No* no9 = new No {'*', '*', no5, no8};
-    // Avalia a expressão a partir da raiz da árvore
-    int resultado = valor(no9);
-    cout << "Resultado: " << resultado << endl; // Deve imprimir 8
+    No* root = nullptr;
+    inserir_no(root, "*");
+    inserir_no(root->left, "/");
+    inserir_no(root->left->left, "+");
+    inserir_no(root->left->left->left, "5");
+    inserir_no(root->left->left->right, "3");
+    inserir_no(root->left->right, "4");
+    inserir_no(root->right, "-");
+    inserir_no(root->right->left, "6");
+    inserir_no(root->right->right, "1");
+
+    cout << "\nArvore de Expressão Aritmética:\n";
+    exibirNos(root);
+    cout << "\n";
+
+    cout << "\nResultado:\n";
+    cout << valor(root);
+    cout << "\n";
     return 0;
 }
