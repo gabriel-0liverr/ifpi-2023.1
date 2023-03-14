@@ -14,13 +14,13 @@ typedef struct no {
 No* criar_no(int value) {
     No* no = (No*) malloc(sizeof(No));
     no->value = value;
-    no->left = NULL;
-    no->right = NULL;
+    no->left = nullptr;
+    no->right = nullptr;
     return no;
 }
 
 void inserir_no(No** root, int value) {
-    if (*root == NULL) {
+    if (*root == nullptr) {
         *root = criar_no(value);
     } else {
         if (value < (*root)->value) {
@@ -32,7 +32,7 @@ void inserir_no(No** root, int value) {
 }
 
 void exibirEmOrdem(No* root){
-    if(root != NULL){
+    if(root != nullptr){
         exibirEmOrdem(root->left);
         printf(" (%d) ", root->value);
         exibirEmOrdem(root->right);
@@ -40,7 +40,7 @@ void exibirEmOrdem(No* root){
 }
 
 void exibirPreOrdem(No* root){
-    if(root != NULL){
+    if(root != nullptr){
         printf(" (%d) ", root->value);
         exibirPreOrdem(root->left);
         exibirPreOrdem(root->right);
@@ -48,7 +48,7 @@ void exibirPreOrdem(No* root){
 }
 
 void exibirPosOrdem(No* root){
-    if(root != NULL){
+    if(root != nullptr){
         exibirPosOrdem(root->left);
         exibirPosOrdem(root->right);
         printf(" (%d) ", root->value);
@@ -56,7 +56,7 @@ void exibirPosOrdem(No* root){
 }
 
 void exibirFilhos(No* root){
-    if(root != NULL){
+    if(root != nullptr){
         printf(" ( %d ", root->value);
         exibirFilhos(root->left);
         exibirFilhos(root->right);
@@ -65,7 +65,7 @@ void exibirFilhos(No* root){
 }
 
 int main() {
-    No* root = NULL;
+    No* root = nullptr;
 
     inserir_no(&root, 5);
     inserir_no(&root, 2);

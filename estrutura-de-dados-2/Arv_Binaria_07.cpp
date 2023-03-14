@@ -1,4 +1,5 @@
 #include <iostream>
+
 using namespace std;
 
 struct No {
@@ -34,6 +35,22 @@ void exibirNos(No* root){
     }
 }
 
+void remover_no(No* &root, char value) {
+    if (root == nullptr) {
+        cout << "NAO ENCONTRADO";
+        return;
+    } else if (value < root->value) {
+        remover_no(root->left, value);
+    } else if (value > root->value) {
+        remover_no(root->right, value);
+    } else {
+        delete root;
+        root = nullptr;
+        cout << "Removido com sucesso!";
+        return;
+    }
+}
+
 int main() {
     No* root = nullptr;
     inserir_no(root, 'D');
@@ -44,7 +61,15 @@ int main() {
     inserir_no(root, 'E');
     inserir_no(root, 'G');
 
-    cout << "\nArvore:\n";
+    cout << "\nArvore Antes:\n";
+    exibirNos(root);
+    cout << "\n";
+
+    cout << "\nRemovendo F...\n";
+    remover_no(root , 'F');
+    cout << "\n";
+
+    cout << "\nArvore Depois:\n";
     exibirNos(root);
     cout << "\n";
 

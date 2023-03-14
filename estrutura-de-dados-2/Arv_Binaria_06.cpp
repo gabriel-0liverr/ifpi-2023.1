@@ -25,12 +25,19 @@ void inserir_no(No* &root, char value) {
     }
 }
 
-void exibirNos(No* root){
+void exibir_asc(No* root){
     if(root != nullptr){
-        cout << " ( " << root->value;
-        exibirNos(root->left);
-        exibirNos(root->right);
-        cout << " ) ";
+        exibir_asc(root->left);
+        cout << " < " << root->value << " > ";
+        exibir_asc(root->right);
+    }
+}
+
+void exibir_dec(No* root){
+    if(root != nullptr){
+        exibir_dec(root->right);
+        cout << " < " << root->value << " > ";
+        exibir_dec(root->left);
     }
 }
 
@@ -44,8 +51,12 @@ int main() {
     inserir_no(root, 'E');
     inserir_no(root, 'G');
 
-    cout << "\nArvore:\n";
-    exibirNos(root);
+    cout << "\nArvore Ascendente:\n";
+    exibir_asc(root);
+    cout << "\n";
+
+    cout << "\nArvore Decrescente:\n";
+    exibir_dec(root);
     cout << "\n";
 
     return 0;

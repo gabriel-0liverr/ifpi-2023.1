@@ -11,13 +11,13 @@ typedef struct no {
 No* criar_no(int value) {
     No* no = (No*) malloc(sizeof(No));
     no->value = value;
-    no->left = NULL;
-    no->right = NULL;
+    no->left = nullptr;
+    no->right = nullptr;
     return no;
 }
 
 void inserir_no(No** root, int value) {
-    if (*root == NULL) {
+    if (*root == nullptr) {
         *root = criar_no(value);
     } else {
         if (value < (*root)->value) {
@@ -29,7 +29,7 @@ void inserir_no(No** root, int value) {
 }
 
 void exibirFilhos(No* root){
-    if(root != NULL){
+    if(root != nullptr){
         cout << " ( " << root->value;
         exibirFilhos(root->left);
         exibirFilhos(root->right);
@@ -39,10 +39,10 @@ void exibirFilhos(No* root){
 
 bool igual(No* root1, No* root2) {
     stack<No*> pilha1, pilha2;
-    if (root1 != NULL) {
+    if (root1 != nullptr) {
         pilha1.push(root1);
     }
-    if (root2 != NULL) {
+    if (root2 != nullptr) {
         pilha2.push(root2);
     }
     while (!pilha1.empty() && !pilha2.empty()) {
@@ -53,19 +53,19 @@ bool igual(No* root1, No* root2) {
         if (atual1->value != atual2->value) {
             return false;
         }
-        if (atual1->left != NULL) {
+        if (atual1->left != nullptr) {
             pilha1.push(atual1->left);
         }
-        if (atual2->left != NULL) {
+        if (atual2->left != nullptr) {
             pilha2.push(atual2->left);
         }
         if (pilha1.size() != pilha2.size()) {
             return false;
         }
-        if (atual1->right != NULL) {
+        if (atual1->right != nullptr) {
             pilha1.push(atual1->right);
         }
-        if (atual2->right != NULL) {
+        if (atual2->right != nullptr) {
             pilha2.push(atual2->right);
         }
         if (pilha1.size() != pilha2.size()) {
@@ -76,7 +76,7 @@ bool igual(No* root1, No* root2) {
 }
 
 int main() {
-    No* root1 = NULL;
+    No* root1 = nullptr;
     inserir_no(&root1, 5);
     inserir_no(&root1, 2);
     inserir_no(&root1, 1);
@@ -85,7 +85,7 @@ int main() {
     inserir_no(&root1, 6);
     inserir_no(&root1, 8);
 
-    No* root2 = NULL;
+    No* root2 = nullptr;
     inserir_no(&root2, 5);
     inserir_no(&root2, 2);
     inserir_no(&root2, 1);

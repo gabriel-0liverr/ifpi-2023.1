@@ -12,13 +12,13 @@ typedef struct no {
 No* criar_no(int value) {
     No* no = (No*) malloc(sizeof(No));
     no->value = value;
-    no->left = NULL;
-    no->right = NULL;
+    no->left = nullptr;
+    no->right = nullptr;
     return no;
 }
 
 void inserir_no(No** root, int value) {
-    if (*root == NULL) {
+    if (*root == nullptr) {
         *root = criar_no(value);
     } else {
         if (value < (*root)->value) {
@@ -30,22 +30,22 @@ void inserir_no(No** root, int value) {
 }
 
 int contarNos(No *root){
-   if(root == NULL)
+   if(root == nullptr)
         return 0;
    else
         return 1 + contarNos(root->left) + contarNos(root->right);
 }
 
 int contarFolhas(No *root){
-   if(root == NULL)
+   if(root == nullptr)
         return 0;
-   if(root->left == NULL && root->right == NULL)
+   if(root->left == nullptr && root->right == nullptr)
         return 1;
    return contarFolhas(root->left) + contarFolhas(root->right);
 }
 
 int altura(No *root){
-    if(root == NULL){
+    if(root == nullptr){
         return -1;
     }
     else{
@@ -72,11 +72,11 @@ No* buscar(No *root, int num){
             return buscar(root->right, num);
         }
     }
-    return NULL;
+    return nullptr;
 }
 
 void exibirFilhos(No* root){
-    if(root != NULL){
+    if(root != nullptr){
         printf(" ( %d ", root->value);
         exibirFilhos(root->left);
         exibirFilhos(root->right);
@@ -85,7 +85,7 @@ void exibirFilhos(No* root){
 }
 
 int main() {
-    No* root = NULL;
+    No* root = nullptr;
 
     inserir_no(&root, 5);
     inserir_no(&root, 2);

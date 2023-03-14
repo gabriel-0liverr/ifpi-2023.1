@@ -11,13 +11,13 @@ typedef struct no {
 No* criar_no(int value) {
     No* no = (No*) malloc(sizeof(No));
     no->value = value;
-    no->left = NULL;
-    no->right = NULL;
+    no->left = nullptr;
+    no->right = nullptr;
     return no;
 }
 
 void inserir_no(No** root, int value) {
-    if (*root == NULL) {
+    if (*root == nullptr) {
         *root = criar_no(value);
     } else {
         if (value < (*root)->value) {
@@ -29,7 +29,7 @@ void inserir_no(No** root, int value) {
 }
 
 void exibirFilhos(No* root){
-    if(root != NULL){
+    if(root != nullptr){
         cout << " ( " << root->value;
         exibirFilhos(root->left);
         exibirFilhos(root->right);
@@ -42,7 +42,7 @@ void checaEB(No* root){
     No* p = root;
     bool ver = 1;
     do{
-        while (p!=NULL){
+        while (p!=nullptr){
             pilha.push(p);
             p = p->left;
         }
@@ -52,7 +52,7 @@ void checaEB(No* root){
             if(!((p->right && p->left) || (!p->right && !p->left))) ver = 0;
             p = p->right;
         }
-    }while (!pilha.empty() || p!=NULL);
+    }while (!pilha.empty() || p!=nullptr);
 
     if(ver == 0){
         cout << "NAO";
@@ -62,7 +62,7 @@ void checaEB(No* root){
 }
 
 int main() {
-    No* root = NULL;
+    No* root = nullptr;
 
     inserir_no(&root, 5);
     inserir_no(&root, 2);
