@@ -48,8 +48,8 @@ int main() {
     // Nomes das disciplinas
     vector<string> disciplinas = {
         "Arquitetura de Computadores",
-        "Algoritmos",
         "Matematica Discreta",
+        "Algoritmos",
         "Calculo 1",
         "Linguagem de Programacao",
         "Calculo 2",
@@ -60,16 +60,16 @@ int main() {
     };
 
     // Adiciona as arestas do grafo conforme as dependências descritas
-    graph[1].push_back(0); // Arquitetura de Computadores -> Algoritmos
+    graph[2].push_back(0); // Arquitetura de Computadores -> Algoritmos
     graph[2].push_back(1); // Matematica Discreta -> Algoritmos
-    graph[2].push_back(3); // Matematica Discreta -> Calculo 1
-    graph[4].push_back(1); // Algoritmos -> Linguagem de Programacao
+    graph[3].push_back(1); // Matematica Discreta -> Calculo 1
+    graph[4].push_back(2); // Algoritmos -> Linguagem de Programacao
     graph[5].push_back(3); // Calculo 1 -> Calculo 2
     graph[6].push_back(4); // Linguagem de Programacao -> Programacao Orientada a Objetos
-    graph[6].push_back(7); // Linguagem de Programacao -> Estrutura de Dados
-    graph[7].push_back(5); // Calculo 2 -> Calculo Numerico Computacional
-    graph[7].push_back(8); // Estrutura de Dados -> Calculo Numerico Computacional
-    graph[8].push_back(9); // Estrutura de Dados -> Banco de Dados
+    graph[7].push_back(4); // Linguagem de Programacao -> Estrutura de Dados
+    graph[8].push_back(5); // Calculo 2 -> Calculo Numerico Computacional
+    graph[8].push_back(7); // Estrutura de Dados -> Calculo Numerico Computacional
+    graph[9].push_back(7); // Estrutura de Dados -> Banco de Dados
 
     // Realiza a ordenação topológica
     vector<string> sortedOrder = topologicalSort(graph, disciplinas);
