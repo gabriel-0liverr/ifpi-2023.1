@@ -3,6 +3,12 @@
 #include <stack>
 using namespace std;
 
+/*
+    Grupo:  Cibelle Maciel
+            Gabriel Oliveira
+            Marcos Vinícius
+*/
+
 // Função recursiva para realizar a ordenação topológica
 void topologicalSortDFS(int vertex, vector<vector<int>>& graph, vector<bool>& visited, stack<int>& result) {
     visited[vertex] = true;
